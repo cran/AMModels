@@ -1,6 +1,6 @@
 #' @name amModelLib
 #' @aliases  amModelLib
-#' @title Creates an AMModelLib object that stores lists of amModel objects and amData objects.  
+#' @title Create An \code{AMModelLib} Object That Stores Lists Of \code{amModel} And \code{amData} Objects  
 #' @description Creates an object of class \code{amModelLib}, either empty, or containing \code{\link{amModel}} and/or \code{\link{amData}} objects.
 #' @details \code{amModelLib} objects are useful for storing multiple models and datasets of a related theme, along with relevant metadata. Most extraction and manipulation functions will attempt to keep any relevant data with any model for which it is used. Multiple models may refer to a single dataset.
 #' @param models  A list of objects of class amModel.  
@@ -92,7 +92,7 @@ amModelLib <- function(models = list(), data = list(), info = list(), descriptio
     if (length(info)) {
         if (!length(names(info))) stop("'info' list must be named.")
         if (!is.list(info)) tryCatch({info <- as.list(info)}, error = function(e) stop("'info' is not a list and cannot be coerced to list."), warning = function(w) stop("'info' is not a list and cannot be coerced to list."))
-        info[['date.created']] <- as.character(as.Date(Sys.time()))
+        info[['date.created']] <- format(Sys.time(), format="%Y-%m-%d %H:%M:%S")
     }
     if (!is.character(description) || length(description) > 1) stop("'description' must be a length 1 character vector.")
     methods::new('amModelLib', models = models, data = data, info = info, description = description)

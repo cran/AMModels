@@ -3,8 +3,8 @@
 #' @docType methods
 #' @include classes.R
 #' @aliases methods-amModel
-#' @title Methods for displaying, summarizing, and manipulating \code{amModel} and \code{amData} objects 
-#' @param object,x An \code{amModel} or \code{amData} object.
+#' @title Methods For Displaying, Summarizing, And Manipulating \code{amModel} And \code{amData} Objects 
+#' @param object,x An \code{\link{amModel}} or \code{\link{amData}} object.
 #' @param i,j indices specifying elements to extract or replace. Indices are numeric or character vectors or empty (missing) or NULL. 
 #' @param drop Not used.
 #' @param value Replacement value. 

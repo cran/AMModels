@@ -2,11 +2,11 @@
 #' @name getters
 #' @aliases getAMModel getAMData ammlDesc ammlInfo 
 #' @rdname getters
-#' @title Extract a single model or data object, get or set info, description, or metadata.
-#' @description  The function \code{getAMData} will extract an \code{amData} object from an \code{amModelLib}; the function \code{getAMModel} will extract an \code{amModel} object from an \code{amModelLib}. The function \code{ammlDesc} can be used to retrieve or set a description of an \code{amModelLib} object. The function \code{ammlInfo} can be used to retrieve or set information about an \code{amModelLib} object. \code{modelMeta} and \code{dataMeta} retrieve and set metadata within \code{amModelLib} objects.
+#' @title Extract A Single Model or Data Object, Get Or Set Info, Description, Or Metadata.
+#' @description  The function \code{getAMData} will extract an \code{\link{amData}} object from an \code{\link{amModelLib}}; the function \code{getAMModel} will extract an \code{\link{amModel}} object from an \code{amModelLib}. The function \code{ammlDesc} can be used to retrieve or set a description of an \code{amModelLib} object. The function \code{ammlInfo} can be used to retrieve or set information about an \code{amModelLib} object. \code{modelMeta} and \code{dataMeta} retrieve and set metadata within \code{amModelLib} objects.
 #' @details The objects created by \code{getAMData} and \code{getAMModel} are returned as their original class unless the argument \code{as.list} is set to \code{TRUE}. If \code{as.list}, a list is returned with the original object in the first element and metadata in the second.\cr The setters for \code{ammlInfo}, \code{modelMeta}, and \code{dataMeta} replace individual elements in their respective lists with each call. To remove elements set their value to \code{NULL} in the named replacement list. 
 #' @param amml An \code{amModelLib} object. 
-#' @param x A name or index to extract from or set within the \code{amModelLib} object.
+#' @param x A name or length 1 integer index to extract from or set within the \code{amModelLib} object.
 #' @param as.list Logical; \code{FALSE} to return just the object, \code{TRUE} to return a list with both object and metadata.
 #' @param value A named list of metadata to set within \code{x}.
 #' @param \dots Additional arguments (not used).
@@ -144,11 +144,17 @@
 
 
 getAMModel <- function(amml, x, as.list=FALSE, ...) {
-    model <- amml@models[[x]]@model
-    if (!as.list) {
-        model
+    if (!methods::is(amml, 'amModelLib') || missing(amml)) stop('Must provide an amModelLib object.')
+    if(missing(x)) stop('Must provide a model name or integer index.')
+    if(any(is.character(x), is.numeric(x))) {
+        model <- amml@models[[x]]@model
+        if (!as.list) {
+            model
+        } else {
+            list(model = model, metadata = amml@models[[x]]@metadata)
+        }
     } else {
-        list(model = model, metadata = amml@models[[x]]@metadata)
+        stop('Model selector must be provided as a character or integer vector.')
     }
 }
 
@@ -157,11 +163,17 @@ getAMModel <- function(amml, x, as.list=FALSE, ...) {
 #' @export
 
 getAMData <- function(amml, x, as.list=FALSE, ...) {
-    dat <- amml@data[[x]]@data
-    if (!as.list) {
-        dat
+    if (!methods::is(amml, 'amModelLib') || missing(amml)) stop('Must provide an amModelLib object.')
+    if(missing(x)) stop('Must provide a model name or integer index.')
+    if(any(is.character(x), is.numeric(x))) {
+        dat <- amml@data[[x]]@data
+        if (!as.list) {
+            dat
+        } else {
+            list(data = dat, metadata = amml@data[[x]]@metadata)
+        }
     } else {
-        list(data = dat, metadata = amml@data[[x]]@metadata)
+        stop('Data selector must be provided as a character or integer vector.')
     }
 }
 
@@ -170,6 +182,7 @@ getAMData <- function(amml, x, as.list=FALSE, ...) {
 #' @export
 
 ammlDesc <- function(amml) {
+    if (!methods::is(amml, 'amModelLib') || missing(amml)) stop('Must provide an amModelLib object.')
     amml@description
 }
 
@@ -177,12 +190,13 @@ ammlDesc <- function(amml) {
 #' @export
 
 `ammlDesc<-` <- function(amml, value) {
-    if (!missing(amml) && !missing(value)) {
+    if (!methods::is(amml, 'amModelLib') || missing(amml)) stop('Must provide an amModelLib object.')
+    if (!missing(value)) {
         if (is.character(value)) {
             amml@description <- value
             amml
         } else {
-            stop("'description' must be a character string.")
+            stop("'value' must be a character string.")
         }
     }
 }
@@ -191,6 +205,7 @@ ammlDesc <- function(amml) {
 #' @export
 
 ammlInfo <- function(amml, x = NULL) {
+    if (!methods::is(amml, 'amModelLib') || missing(amml)) stop('Must provide an amModelLib object.')
     if (is.null(x)) {
         amml@info
     } else {
@@ -202,7 +217,8 @@ ammlInfo <- function(amml, x = NULL) {
 #' @export
 
 `ammlInfo<-` <- function(amml, value) {
-    if (!missing(amml) && !missing(value)) {
+    if (!methods::is(amml, 'amModelLib') || missing(amml)) stop('Must provide an amModelLib object.')
+    if (!missing(value)) {
         if (is.list(value) && length(names(value))) {
             for (i in names(value)) amml@info[[i]] <- value[[i]]
             amml@info <- amml@info[!sapply(amml@info, is.null)]
@@ -217,6 +233,7 @@ ammlInfo <- function(amml, x = NULL) {
 #' @export
 
 modelMeta <- function(amml, x=NULL) {
+    if (!methods::is(amml, 'amModelLib') || missing(amml)) stop('Must provide an amModelLib object.')
     if (is.null(x)) {
         lapply(amml@models, function(y) y@metadata)
     } else if (length(x) == 1) {
@@ -242,7 +259,7 @@ modelMeta <- function(amml, x=NULL) {
             }
             amml
         } else if (missing(x)) {
-            stop("'x' must identify model as an index or character string.")
+            stop("'x' must identify model as an integer index or character string.")
         } else if (missing(amml)) {
             stop("'amml' must be an amModelLib object.")
         } else if (missing(value)) {
@@ -256,6 +273,7 @@ modelMeta <- function(amml, x=NULL) {
 #' @export
 
 dataMeta <- function(amml, x=NULL) {
+    if (!methods::is(amml, 'amModelLib') || missing(amml)) stop('Must provide an amModelLib object.')
     if (is.null(x)) {
         lapply(amml@data, function(y) y@metadata)
     } else if (length(x) == 1) {
@@ -281,7 +299,7 @@ dataMeta <- function(amml, x=NULL) {
             }
             amml
         } else if (missing(x)) {
-            stop("'x' must identify data as an index or character string.")
+            stop("'x' must identify data as an integer index or character string.")
         } else if (missing(amml)) {
             stop("'amml' must be an amModelLib object.")
         } else if (missing(value)) {

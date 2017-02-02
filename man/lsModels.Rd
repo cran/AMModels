@@ -3,7 +3,7 @@
 \name{lsModels}
 \alias{lsData}
 \alias{lsModels}
-\title{List names Of \code{amModel} or \code{amData} objects in an \code{amModelLib} object.}
+\title{List Names Of \code{amModel} Or \code{amData} Objects In An \code{amModelLib} Object.}
 \usage{
 lsModels(x)
 
@@ -16,7 +16,7 @@ lsData(x)
 A vector of names.
 }
 \description{
-List names of all objects of class \code{amModel} (a fitted model with  mandatory metadata) or \code{amData} (a dataset with mandatory metadata) in an \code{amModelLib} object.
+List names of all objects of class \code{\link{amModel}} (a fitted model with  mandatory metadata) or \code{\link{amData}} (a dataset with mandatory metadata) in an \code{\link{amModelLib}} object.
 }
 \examples{
 # create dataset from lm helpfile
@@ -97,7 +97,7 @@ Other amModelLib: \code{\link{AMModels}};
   \code{\link{getAMData}}, \code{\link{getAMData}},
   \code{\link{getAMModel}}, \code{\link{getters}},
   \code{\link{modelMeta}}, \code{\link{modelMeta<-}};
-  \code{\link{getAMModelLib}};
+  \code{\link{grepAMModelLib}};
   \code{\link{insertAMModelLib}}; \code{\link{rmData}},
   \code{\link{rmData}}, \code{\link{rmModel}}
 }

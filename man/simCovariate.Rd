@@ -2,7 +2,7 @@
 % Please edit documentation in R/simCovariate.R
 \name{simCovariate}
 \alias{simCovariate}
-\title{Simulate a dataframe of uncorrelated covariate(s) from the normal, uniform, beta, binomial, poisson or bernoulli distributions.}
+\title{Simulate A Dataframe Of Uncorrelated Covariate(s)}
 \usage{
 simCovariate(cov.list = NULL, ..., n, add.yr = TRUE)
 }
@@ -11,8 +11,8 @@ simCovariate(cov.list = NULL, ..., n, add.yr = TRUE)
 
 \item{...}{additional arguments to be passed to \code{distr}. Argument in which the simulating distribution its corresponding arguments are specified.Minimally
 contains \code{n}, for number of samples to draw, \code{shape1, shape2} for \code{\link{rbeta}},
-and \code{size, prob} for \code{\link{rbinom}}. May also contain optional arguments such as
-\code{min, max} for \code{\link{runif}}, \code{mean, sd} for \code{\link{rnorm}}, and \code{ncp} for \code{\link{rbeta}}. Accepts single values, or vectors that will be applied to multiple columns. Vectors should be used with care as lengths are not checked.}
+and \code{size, prob} for \code{\link[stats]{rbinom}}. May also contain optional arguments such as
+\code{min, max} for \code{\link[stats]{runif}}, \code{mean, sd} for \code{\link[stats]{rnorm}}, and \code{ncp} for \code{\link[stats]{rbeta}}. Accepts single values, or vectors that will be applied to multiple columns. Vectors should be used with care as lengths are not checked.}
 
 \item{n}{The number of samples to generate from each covariate.}
 
@@ -23,10 +23,10 @@ A data frame of random numbers from the specified distribution,
 with number of columns equal to the the number of cov.names (ncol=length(cov.names)).
 }
 \description{
-Quickly create a dataframe of uncorrelated random variables which can be used as covariates.
+Quickly create a dataframe of uncorrelated random variables which can be used as covariates. Values are drawn from the normal, uniform, beta, binomial, poisson or bernoulli distributions.
 }
 \details{
-\code{simCovariate} will create a vector(s) of random variables from a specified R probability distribution. The distribution can be specified by entering the name or the name of the R function; partial matching is performed. For example, specifying a distribution as runif, 'runif', uniform, or u can be be used to generate random samples from a uniform distribution, in which case R's \code{\link{runif}} function is called.  Additional arguments to the \code{\link{runif}} function are separated by commas. The function can be parameterized so that multiple covariates can be simulated from either the same distribution or from different distributions. \cr
+\code{simCovariate} will create a vector(s) of random variables from a specified R probability distribution. The distribution can be specified by entering the name or the name of the R function; partial matching is performed. For example, specifying a distribution as runif, 'runif', uniform, or u can be be used to generate random samples from a uniform distribution, in which case R's \code{\link[stats]{runif}} function is called.  Additional arguments to the \code{\link[stats]{runif}} function are separated by commas. The function can be parameterized so that multiple covariates can be simulated from either the same distribution or from different distributions. \cr
 }
 \examples{
 # We can specify the distribution using a function, function name,

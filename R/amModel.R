@@ -1,10 +1,10 @@
 #' @name amModel
 #' @aliases amModel
-#' @title Creates an AMModel object that pairs models with their metadata.
-#' @description Creates an object of class \code{amModel}, which is a fitted model object (or similar) with mandatory metadata.
+#' @title Create An \code{amModel} Object That Pairs Models With Their Metadata
+#' @description Creates an object of class \code{\link{amModel}}, which is a fitted model object (or similar) with mandatory metadata.
 #' @param model A model fit object or similar.
 #' @param \dots Named metadata elements, either supplied individually and coerced to list or supplied as a named list.
-#' @return An object of class \code{amModel} suitable for inclusion in an \code{amModelLib}.
+#' @return An object of class \code{amModel} suitable for inclusion in an \code{\link{amModelLib}}.
 #' @family amModelLib
 #' @keywords manip
 #' @export 
@@ -72,8 +72,10 @@
 
 amModel <- function(model, ...) {
   metadata <- list(...)
-  if(is.list(metadata[[1]])) metadata <- metadata[[1]]
-  metadata$date <- as.character(as.Date(Sys.time()))
+  if(length(metadata)) {
+    if(is.list(metadata[[1]])) metadata <- metadata[[1]]
+  }
+  metadata$date <- format(Sys.time(), format="%Y-%m-%d %H:%M:%S")
   amm <- methods::new('amModel', model = model, metadata = metadata)
   amm
 }

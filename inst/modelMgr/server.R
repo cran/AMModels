@@ -1235,12 +1235,14 @@ shinyServer(
                 newmodname <- make.names(input$newModelName)
                 newmod <- input$selectnewmodelobject
                 if(!is.null(newmod) && input$newModelName != '') {
-                    newmod <- .GlobalEnv[[newmod]]
-                    newmod <- list(amModel(newmod))
-                    names(newmod) <- newmodname
-                    values$currentAMModelLib@models <- c(values$currentAMModelLib@models, newmod)
-                    values$amModelLibForModals@models <- c(values$currentAMModelLib@models, newmod)
-                    updateTextInput(session, 'newModelName', value='')
+                    if(!is.na(newmod) && newmod != '') {
+                        newmod <- .GlobalEnv[[newmod]]
+                        newmod <- list(amModel(newmod))
+                        names(newmod) <- newmodname
+                        values$currentAMModelLib@models <- c(values$currentAMModelLib@models, newmod)
+                        values$amModelLibForModals@models <- c(values$currentAMModelLib@models, newmod)
+                        updateTextInput(session, 'newModelName', value='')
+                    }
                 }
             })
         })
@@ -1293,7 +1295,7 @@ shinyServer(
                         } else {
                             search <- input$searchModelComponent
                         } 
-	                    values$editedAMModelLib <- getAMModelLib(input$searchModelString, selectedModel, search=search)
+	                    values$editedAMModelLib <- grepAMModelLib(input$searchModelString, selectedModel, search=search)
 	                }
                 }
             })

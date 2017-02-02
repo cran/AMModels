@@ -94,15 +94,15 @@ mymodels
 
 # search the entire amModelLib for the word 'intercept'
 # the dataset associated with the model will be returned
-getAMModelLib(pattern = "intercept", amml = mymodels)
+grepAMModelLib(pattern = "intercept", amml = mymodels)
 
 # search for data containing the word 'log'
-getAMModelLib(pattern = "log", amml = mymodels, search = "data")
+grepAMModelLib(pattern = "log", amml = mymodels, search = "data")
 
 # search for models containing the word 'full';
 # because 'full.model' is soft-linked to a dataset,
 # the dataset information will be returned.
-getAMModelLib(pattern = "full", amml = mymodels, search = "model")
+grepAMModelLib(pattern = "full", amml = mymodels, search = "model")
 
 
 # list names of models in an amModelLib
@@ -130,12 +130,12 @@ class(getAMModel(amml = mymodels, 'full.model', as.list = FALSE))
 getAMModel(amml = mymodels, 1, as.list = FALSE)
 
 # remove just the second model
-rmModel('no.int.model', amml = mymodels)
+rmModel(mymodels, 'no.int.model')
 
 # remove the first plant data
 # notice a warning is produced because some amModels are softly linked
 # to the dataset via the metadata keyword, 'data'
-rmData('plant.data', amml = mymodels)
+rmData(mymodels, 'plant.data')
 
 \dontrun{
 # The shiny app
@@ -153,7 +153,7 @@ Other amModelLib: \code{\link{amData}},
   \code{\link{dataMeta<-}}, \code{\link{getAMData}},
   \code{\link{getAMData}}, \code{\link{getAMModel}},
   \code{\link{getters}}, \code{\link{modelMeta}},
-  \code{\link{modelMeta<-}}; \code{\link{getAMModelLib}};
+  \code{\link{modelMeta<-}}; \code{\link{grepAMModelLib}};
   \code{\link{insertAMModelLib}}; \code{\link{lsData}},
   \code{\link{lsData}}, \code{\link{lsModels}},
   \code{\link{lsModels}}; \code{\link{rmData}},

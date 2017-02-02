@@ -2,14 +2,14 @@
 #' @docType methods
 #' @include classes.R methods-amModel.R
 #' @aliases methods-amModelLib
-#' @title Methods for displaying, summarizing, and manipulating \code{amModelLib} objects
-#' @param object An \code{amModelLib} object.
+#' @title Methods For Displaying, Summarizing, And Manipulating \code{amModelLib} Objects
+#' @param object An \code{\link{amModelLib}} object.
 #' @param x An \code{amModelLib} object.
-#' @param recursive Iterate recursively through lists (ignored)
+#' @param recursive Iterate recursively through lists (ignored).
 #' @param i,j indices specifying elements to extract or replace. Indices are numeric or character vectors or empty (missing) or NULL. 
 #' @param drop Not used.
 #' @param value Replacement value.
-#' @param name For \code{$} A literal character string or a name (possibly backtick quoted); for \code{summary} an \code{amModel} or \code{amData} name as character string.
+#' @param name For \code{$} A literal character string or a name (possibly backtick quoted); for \code{summary} an \code{\link{amModel}} or \code{\link{amData}} name as character string.
 #' @param \dots Additional arguments passed to other functions or methods.
 #' @details Summary adds the metadata to the default show method. If \code{name} is supplied the call is passed on to the \code{amModel} or \code{amData} object with the specified name.
 #' @return \code{summary} returns a list with the same elements displayed during the call. Others return an \code{amModelLib} object.

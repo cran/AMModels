@@ -2,7 +2,7 @@
 % Please edit documentation in R/modelMgr.R
 \name{modelMgr}
 \alias{modelMgr}
-\title{Graphical UI for the AMModels package.}
+\title{Graphical UI For The AMModels Package}
 \usage{
 modelMgr(...)
 }

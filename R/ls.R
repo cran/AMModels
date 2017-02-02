@@ -1,7 +1,7 @@
 #' @name lsModels
 #' @aliases lsModels lsData
-#' @title List names Of \code{amModel} or \code{amData} objects in an \code{amModelLib} object.
-#' @description List names of all objects of class \code{amModel} (a fitted model with  mandatory metadata) or \code{amData} (a dataset with mandatory metadata) in an \code{amModelLib} object.
+#' @title List Names Of \code{amModel} Or \code{amData} Objects In An \code{amModelLib} Object.
+#' @description List names of all objects of class \code{\link{amModel}} (a fitted model with  mandatory metadata) or \code{\link{amData}} (a dataset with mandatory metadata) in an \code{\link{amModelLib}} object.
 #' @param x An object of class \code{amModelLib}.
 #' @return A vector of names.
 #' @family amModelLib

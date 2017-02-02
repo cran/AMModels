@@ -4,7 +4,7 @@
 \name{amModel}
 \alias{amModel}
 \alias{amModel-class}
-\title{Creates an AMModel object that pairs models with their metadata.}
+\title{Create An \code{amModel} Object That Pairs Models With Their Metadata}
 \usage{
 amModel(model, ...)
 }
@@ -14,10 +14,10 @@ amModel(model, ...)
 \item{\dots}{Named metadata elements, either supplied individually and coerced to list or supplied as a named list.}
 }
 \value{
-An object of class \code{amModel} suitable for inclusion in an \code{amModelLib}.
+An object of class \code{amModel} suitable for inclusion in an \code{\link{amModelLib}}.
 }
 \description{
-Creates an object of class \code{amModel}, which is a fitted model object (or similar) with mandatory metadata.
+Creates an object of class \code{\link{amModel}}, which is a fitted model object (or similar) with mandatory metadata.
 
 An S4 class to store models with descriptive metadata.
 }
@@ -99,7 +99,7 @@ Other amModelLib: \code{\link{AMModels}};
   \code{\link{getAMData}}, \code{\link{getAMData}},
   \code{\link{getAMModel}}, \code{\link{getters}},
   \code{\link{modelMeta}}, \code{\link{modelMeta<-}};
-  \code{\link{getAMModelLib}};
+  \code{\link{grepAMModelLib}};
   \code{\link{insertAMModelLib}}; \code{\link{lsData}},
   \code{\link{lsData}}, \code{\link{lsModels}},
   \code{\link{lsModels}}; \code{\link{rmData}},

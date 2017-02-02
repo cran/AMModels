@@ -1,5 +1,5 @@
-#' @name getAMModelLib
-#' @title Search for a model in a model list using \code{grep}
+#' @name grepAMModelLib
+#' @title Search For A Model In A Model List Using \code{grep}
 #' @description Returns an abbreviated amModelLib object that contains models and data that meet search terms.
 #' @param pattern Search string or value, typically a model or data name
 #' @param amml  An \code{\link{amModelLib}} object
@@ -71,23 +71,23 @@
 #'
 #' # search the entire amModelLib for the word 'intercept'
 #' # the dataset associated with the model will be returned
-#' getAMModelLib("intercept", amml = mymodels) 
+#' grepAMModelLib("intercept", amml = mymodels) 
 #' 
 #' # the class of returned search is an amModelLib object
-#' class(getAMModelLib("intercept", amml = mymodels))  
+#' class(grepAMModelLib("intercept", amml = mymodels))  
 #'  
 #' # search for data containing the word 'log'
-#' getAMModelLib("log", amml = mymodels, search = "data") 
+#' grepAMModelLib("log", amml = mymodels, search = "data") 
 #' 
 #' # search for models containing the word 'full'
 #' # Because 'full.model' is soft-linked to a dataset, 
 #' # the dataset information will be returned.
-#' getAMModelLib("full", amml = mymodels, search = "model") 
+#' grepAMModelLib("full", amml = mymodels, search = "model") 
 #' 
 #'   
 
 
-getAMModelLib <- function(
+grepAMModelLib <- function(
     pattern,        # Either a model name, a data name, or a search string or value
     amml,         # an amModelLib object
     search = c('all', 'model', 'data'), # search model or data names and contents
@@ -157,8 +157,8 @@ getAMModelLib <- function(
         amml
     } else if (search == 'all') {
         # search models
-        foundmodels <- getAMModelLib(pattern, amml, search = 'model', ...)
-        founddata <- getAMModelLib(pattern, amml, search = 'data', ...)
+        foundmodels <- grepAMModelLib(pattern, amml, search = 'model', ...)
+        founddata <- grepAMModelLib(pattern, amml, search = 'data', ...)
         # filter for unique names
         foundmodels_modnames <- lsModels(foundmodels)
         foundmodels_datnames <- lsModels(foundmodels)

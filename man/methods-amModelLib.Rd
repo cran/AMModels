@@ -13,7 +13,7 @@
 \alias{methods-amModelLib}
 \alias{show,amModelLib-method}
 \alias{summary,amModelLib-method}
-\title{Methods for displaying, summarizing, and manipulating \code{amModelLib} objects}
+\title{Methods For Displaying, Summarizing, And Manipulating \code{amModelLib} Objects}
 \usage{
 \S4method{summary}{amModelLib}(object, name, ...)
 
@@ -30,13 +30,13 @@
 \S4method{[[}{amModelLib,ANY,ANY}(x, i, j, ...) <- value
 }
 \arguments{
-\item{object}{An \code{amModelLib} object.}
+\item{object}{An \code{\link{amModelLib}} object.}
 
-\item{name}{For \code{$} A literal character string or a name (possibly backtick quoted); for \code{summary} an \code{amModel} or \code{amData} name as character string.}
+\item{name}{For \code{$} A literal character string or a name (possibly backtick quoted); for \code{summary} an \code{\link{amModel}} or \code{\link{amData}} name as character string.}
 
 \item{x}{An \code{amModelLib} object.}
 
-\item{recursive}{Iterate recursively through lists (ignored)}
+\item{recursive}{Iterate recursively through lists (ignored).}
 
 \item{i,j}{indices specifying elements to extract or replace. Indices are numeric or character vectors or empty (missing) or NULL.}
 
@@ -50,7 +50,7 @@
 \code{summary} returns a list with the same elements displayed during the call. Others return an \code{amModelLib} object.
 }
 \description{
-Methods for displaying, summarizing, and manipulating \code{amModelLib} objects
+Methods For Displaying, Summarizing, And Manipulating \code{amModelLib} Objects
 }
 \details{
 Summary adds the metadata to the default show method. If \code{name} is supplied the call is passed on to the \code{amModel} or \code{amData} object with the specified name.

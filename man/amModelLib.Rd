@@ -4,7 +4,7 @@
 \name{amModelLib}
 \alias{amModelLib}
 \alias{amModelLib-class}
-\title{Creates an AMModelLib object that stores lists of amModel objects and amData objects.}
+\title{Create An \code{AMModelLib} Object That Stores Lists Of \code{amModel} And \code{amData} Objects}
 \usage{
 amModelLib(models = list(), data = list(), info = list(),
   description = "")
@@ -122,7 +122,7 @@ Other amModelLib: \code{\link{AMModels}};
   \code{\link{getAMData}}, \code{\link{getAMData}},
   \code{\link{getAMModel}}, \code{\link{getters}},
   \code{\link{modelMeta}}, \code{\link{modelMeta<-}};
-  \code{\link{getAMModelLib}};
+  \code{\link{grepAMModelLib}};
   \code{\link{insertAMModelLib}}; \code{\link{lsData}},
   \code{\link{lsData}}, \code{\link{lsModels}},
   \code{\link{lsModels}}; \code{\link{rmData}},

@@ -1,10 +1,10 @@
 #' @name amData
 #' @aliases  amData
-#' @title Creates an \code{AMModelData} object that pairs datasets with associated metadata.
-#' @description Creates an object of class \code{amData}, which is typically a data frame of covariate data or model fitting data, with mandatory metadata.
+#' @title Create An \code{amData} Object That Pairs Datasets With Associated Metadata
+#' @description Creates an object of class \code{\link{amData}}, which is typically a data frame of covariate data or model fitting data, with mandatory metadata. It is worth noting that some models include the data as part of the fitted model object, e.g. \code{lm} and \code{glm}, which access embedded data with \code{model.frame}. For large datasets that are embedded in the model, it may be worth documenting metadata a placeholder object such as the character string \code{"embedded data"} rather than a redundant data object.
 #' @param data  A dataset, typically data frame but may be in any structure.  
 #' @param \dots Named metadata elements, either supplied individually and coerced to list or supplied as a named list.
-#' @return An object of class \code{amData} suitable for inclusion in an \code{amModelLib} object.
+#' @return An object of class \code{amData} suitable for inclusion in an \code{\link{amModelLib}} object.
 #' @family amModelLib
 #' @keywords manip
 #' @export 
@@ -69,8 +69,10 @@
 
 amData <- function(data, ...) {
   metadata <- list(...)
-  if(is.list(metadata[[1]])) metadata <- metadata[[1]]
-  metadata$date <- as.character(as.Date(Sys.time()))
+  if(length(metadata)) {
+      if(is.list(metadata[[1]])) metadata <- metadata[[1]]
+  } 
+  metadata$date <- format(Sys.time(), format="%Y-%m-%d %H:%M:%S")
   ammd <- methods::new('amData', data = data, metadata = metadata)
   ammd
   

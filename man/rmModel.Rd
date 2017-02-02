@@ -3,22 +3,22 @@
 \name{rmModel}
 \alias{rmData}
 \alias{rmModel}
-\title{Remove An \code{amModel} or \code{amData} Object From An \code{amModelLib} Object.}
+\title{Remove An \code{amModel} Or \code{amData} Object From An \code{amModelLib} Object}
 \usage{
-rmModel(x, amml)
+rmModel(amml, x)
 
-rmData(x, amml)
+rmData(amml, x)
 }
 \arguments{
-\item{x}{A character vector, numeric vector, or logical vector identifying model(s) or data to remove.}
-
 \item{amml}{An \code{amModelLib} object.}
+
+\item{x}{A character vector, numeric vector, or logical vector identifying model(s) or data to remove.}
 }
 \value{
 An object of class \code{amModelLib}.
 }
 \description{
-Remove an object of class \code{amModel} or \code{amData} (a fitted model object or data to fit a model or use as covariate data, with mandatory metadata) from an \code{amModelLib} object.
+Remove an object of class \code{\link{amModel}} or \code{\link{amData}} (a fitted model object or data to fit a model or use as covariate data, with mandatory metadata) from an \code{\link{amModelLib}} object.
 }
 \examples{
 # create dataset from lm helpfile
@@ -80,10 +80,10 @@ mymodels
 
 
 # remove just the second model
-rmModel('no.int.model', amml = mymodels)
+rmModel(mymodels, 'no.int.model')
 
 # remove the first plant data, has a soft-link from a model, throws warning.
-rmData('plant.data', amml = mymodels)
+rmData(mymodels, 'plant.data')
 
 # show the library
 mymodels
@@ -100,7 +100,7 @@ Other amModelLib: \code{\link{AMModels}};
   \code{\link{getAMData}}, \code{\link{getAMData}},
   \code{\link{getAMModel}}, \code{\link{getters}},
   \code{\link{modelMeta}}, \code{\link{modelMeta<-}};
-  \code{\link{getAMModelLib}};
+  \code{\link{grepAMModelLib}};
   \code{\link{insertAMModelLib}}; \code{\link{lsData}},
   \code{\link{lsData}}, \code{\link{lsModels}},
   \code{\link{lsModels}}

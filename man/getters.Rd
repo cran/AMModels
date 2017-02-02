@@ -12,7 +12,7 @@
 \alias{getters}
 \alias{modelMeta}
 \alias{modelMeta<-}
-\title{Extract a single model or data object, get or set info, description, or metadata.}
+\title{Extract A Single Model or Data Object, Get Or Set Info, Description, Or Metadata.}
 \usage{
 getAMModel(amml, x, as.list = FALSE, ...)
 
@@ -37,7 +37,7 @@ dataMeta(amml, x) <- value
 \arguments{
 \item{amml}{An \code{amModelLib} object.}
 
-\item{x}{A name or index to extract from or set within the \code{amModelLib} object.}
+\item{x}{A name or length 1 integer index to extract from or set within the \code{amModelLib} object.}
 
 \item{as.list}{Logical; \code{FALSE} to return just the object, \code{TRUE} to return a list with both object and metadata.}
 
@@ -49,7 +49,7 @@ dataMeta(amml, x) <- value
 The model or data object in its original form, or if \code{as.list} a list with \item{models}{The original model} (or \item{data}{The original data} ) and \item{metadata}{metadata}.
 }
 \description{
-The function \code{getAMData} will extract an \code{amData} object from an \code{amModelLib}; the function \code{getAMModel} will extract an \code{amModel} object from an \code{amModelLib}. The function \code{ammlDesc} can be used to retrieve or set a description of an \code{amModelLib} object. The function \code{ammlInfo} can be used to retrieve or set information about an \code{amModelLib} object. \code{modelMeta} and \code{dataMeta} retrieve and set metadata within \code{amModelLib} objects.
+The function \code{getAMData} will extract an \code{\link{amData}} object from an \code{\link{amModelLib}}; the function \code{getAMModel} will extract an \code{\link{amModel}} object from an \code{amModelLib}. The function \code{ammlDesc} can be used to retrieve or set a description of an \code{amModelLib} object. The function \code{ammlInfo} can be used to retrieve or set information about an \code{amModelLib} object. \code{modelMeta} and \code{dataMeta} retrieve and set metadata within \code{amModelLib} objects.
 }
 \details{
 The objects created by \code{getAMData} and \code{getAMModel} are returned as their original class unless the argument \code{as.list} is set to \code{TRUE}. If \code{as.list}, a list is returned with the original object in the first element and metadata in the second.\cr The setters for \code{ammlInfo}, \code{modelMeta}, and \code{dataMeta} replace individual elements in their respective lists with each call. To remove elements set their value to \code{NULL} in the named replacement list.
@@ -182,7 +182,7 @@ Other amModelLib: \code{\link{AMModels}};
   \code{\link{amData}}, \code{\link{amData-class}};
   \code{\link{amModelLib}}, \code{\link{amModelLib-class}};
   \code{\link{amModel}}, \code{\link{amModel-class}};
-  \code{\link{getAMModelLib}};
+  \code{\link{grepAMModelLib}};
   \code{\link{insertAMModelLib}}; \code{\link{lsData}},
   \code{\link{lsData}}, \code{\link{lsModels}},
   \code{\link{lsModels}}; \code{\link{rmData}},

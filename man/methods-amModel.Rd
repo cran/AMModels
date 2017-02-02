@@ -23,7 +23,7 @@
 \alias{methods-amModel}
 \alias{summary,amData-method}
 \alias{summary,amModel-method}
-\title{Methods for displaying, summarizing, and manipulating \code{amModel} and \code{amData} objects}
+\title{Methods For Displaying, Summarizing, And Manipulating \code{amModel} And \code{amData} Objects}
 \usage{
 \S4method{summary}{amModel}(object, ...)
 
@@ -46,7 +46,7 @@
 \S4method{[[}{amData,ANY,ANY}(x, i) <- value
 }
 \arguments{
-\item{object,x}{An \code{amModel} or \code{amData} object.}
+\item{object,x}{An \code{\link{amModel}} or \code{\link{amData}} object.}
 
 \item{i,j}{indices specifying elements to extract or replace. Indices are numeric or character vectors or empty (missing) or NULL.}
 
@@ -57,7 +57,7 @@
 \item{\dots}{Additional arguments passed to other functions or methods.}
 }
 \description{
-Methods for displaying, summarizing, and manipulating \code{amModel} and \code{amData} objects
+Methods For Displaying, Summarizing, And Manipulating \code{amModel} And \code{amData} Objects
 }
 \details{
 Summary assumes some meaningful summary method exists for each object in its home package.

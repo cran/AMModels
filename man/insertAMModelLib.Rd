@@ -2,27 +2,27 @@
 % Please edit documentation in R/insertAMModelLib.R
 \name{insertAMModelLib}
 \alias{insertAMModelLib}
-\title{Insert model of class amModel or dataset of class amData into an amModelLib object.  If the amModelLib is not specified, the function will create an info-less and description-less lib if none is specified in \dots argument.}
+\title{Insert Model Of Class \code{amModel} Or Dataset Of Class \code{amData} Into An \code{amModelLib} Object}
 \usage{
 insertAMModelLib(models, data, amml, ...)
 }
 \arguments{
-\item{models}{An object of class amModel}
+\item{models}{A named list of \code{\link{amModel}} objects, each composed of a fitted model object and metadata.}
 
-\item{data}{An object of class amData}
+\item{data}{An object of class \code{\link{amData}}.}
 
-\item{amml}{The name of the object that of class amModelLib.}
+\item{amml}{The name of the object that of class \code{amModelLib}.}
 
-\item{...}{Additional arguments to be passed to the function \code{createAMModelList} which will create the the amModelLib if not specified.}
+\item{...}{Additional arguments to be passed to the function \code{amModelLib} to be included in the \code{amModelLib} if one is created.}
 }
 \value{
-An object of class amModelLib
+An object of class \code{amModelLib}
 }
 \description{
-Inserts a model into the model slot of an amModelLib object, or inserts a dataset into the data slot of an amModelLib object.
+Inserts a model into the model slot of an \code{\link{amModelLib}} object, or inserts a dataset into the data slot of an \code{amModelLib} object. If the \code{amModelLib} is not specified, the function will create an info-less and description-less lib -- or specify these components in the \dots argument.
 }
 \details{
-If the argument amml is NULL, the function will call \code{createAMModelList} to create the object.  The argument info can be passed to this function via the \dots argument.
+If the argument amml is NULL, the function will call \code{amModelLib} to create the object.  The argument info can be passed to this function via the \dots argument.
 }
 \examples{
 # create dataset from lm helpfile
@@ -93,7 +93,7 @@ Other amModelLib: \code{\link{AMModels}};
   \code{\link{getAMData}}, \code{\link{getAMData}},
   \code{\link{getAMModel}}, \code{\link{getters}},
   \code{\link{modelMeta}}, \code{\link{modelMeta<-}};
-  \code{\link{getAMModelLib}}; \code{\link{lsData}},
+  \code{\link{grepAMModelLib}}; \code{\link{lsData}},
   \code{\link{lsData}}, \code{\link{lsModels}},
   \code{\link{lsModels}}; \code{\link{rmData}},
   \code{\link{rmData}}, \code{\link{rmModel}}

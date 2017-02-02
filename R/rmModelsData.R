@@ -1,9 +1,9 @@
 #' @name rmModel
 #' @aliases rmModel rmData
-#' @title Remove An \code{amModel} or \code{amData} Object From An \code{amModelLib} Object.
-#' @description Remove an object of class \code{amModel} or \code{amData} (a fitted model object or data to fit a model or use as covariate data, with mandatory metadata) from an \code{amModelLib} object.
-#' @param x A character vector, numeric vector, or logical vector identifying model(s) or data to remove.
+#' @title Remove An \code{amModel} Or \code{amData} Object From An \code{amModelLib} Object
+#' @description Remove an object of class \code{\link{amModel}} or \code{\link{amData}} (a fitted model object or data to fit a model or use as covariate data, with mandatory metadata) from an \code{\link{amModelLib}} object.
 #' @param amml An \code{amModelLib} object.
+#' @param x A character vector, numeric vector, or logical vector identifying model(s) or data to remove.
 #' @return An object of class \code{amModelLib}.
 #' @family amModelLib
 #' @keywords utilities
@@ -69,15 +69,17 @@
 #' 
 #' 
 #' # remove just the second model
-#' rmModel('no.int.model', amml = mymodels)
+#' rmModel(mymodels, 'no.int.model')
 #' 
 #' # remove the first plant data, has a soft-link from a model, throws warning.
-#' rmData('plant.data', amml = mymodels)
+#' rmData(mymodels, 'plant.data')
 #'
 #' # show the library
 #' mymodels
 
-rmModel <- function(x, amml) {
+rmModel <- function(amml, x) {
+    if (!methods::is(amml, 'amModelLib') || missing(amml)) stop('Must provide an amModelLib object.')
+    if(missing(x)) stop("Must specify value 'x' to remove.")
     if (any(all(is.numeric(x)), all(is.logical(x)))) {
         amml@models <- amml@models[-x]
     } else if (all(is.character(x))) {
@@ -88,7 +90,9 @@ rmModel <- function(x, amml) {
 
 
 #' @rdname rmModel
-rmData <- function(x, amml) {
+rmData <- function(amml, x) {
+    if (!methods::is(amml, 'amModelLib') || missing(amml)) stop('Must provide an amModelLib object.')
+    if(missing(x)) stop("Must specify value 'x' to remove.")
     # identify orphan models to report
     datnames <- unlist(lapply(amml@models, function(y) grep('data', names(y@metadata), ignore.case = TRUE)))
     datnames2 <- unlist(lapply(names(datnames), function(y) amml@models[[y]]@metadata[[datnames[y]]]))

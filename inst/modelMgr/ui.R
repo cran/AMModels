@@ -293,10 +293,6 @@ shinyUI(
                 column(6,
                     div(style='padding:1.25em 0em 0em 1em;',
                         uiOutput('reportLastActionTarget'),
-                        div(style='clear:both;',
-                            p(style='font-weight:bold;', 'Output Preview:'),
-                            textOutput('summaryOfEditedModel', container=tags$pre)
-                        ),
                         div(style='width:100%;min-height:50px;',
                             # Name & save box are coded manually
                             HTML(paste0('   
@@ -327,6 +323,10 @@ shinyUI(
                                 '</span></span>'
                             )),
                             bsTooltip(id='newObjectName', title='Name must be provided for object summarized above to be saved to your Global Environment. Coerced to valid R name.', placement = "top", trigger = "hover", options = list(container='body'))
+                        ),
+                        div(style='clear:both;',
+                            p(style='font-weight:bold;', 'Output Preview:'),
+                            textOutput('summaryOfEditedModel', container=tags$pre)
                         )
                     )
                 )

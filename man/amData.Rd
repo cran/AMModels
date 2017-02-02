@@ -4,7 +4,7 @@
 \name{amData}
 \alias{amData}
 \alias{amData-class}
-\title{Creates an \code{AMModelData} object that pairs datasets with associated metadata.}
+\title{Create An \code{amData} Object That Pairs Datasets With Associated Metadata}
 \usage{
 amData(data, ...)
 }
@@ -14,10 +14,10 @@ amData(data, ...)
 \item{\dots}{Named metadata elements, either supplied individually and coerced to list or supplied as a named list.}
 }
 \value{
-An object of class \code{amData} suitable for inclusion in an \code{amModelLib} object.
+An object of class \code{amData} suitable for inclusion in an \code{\link{amModelLib}} object.
 }
 \description{
-Creates an object of class \code{amData}, which is typically a data frame of covariate data or model fitting data, with mandatory metadata.
+Creates an object of class \code{\link{amData}}, which is typically a data frame of covariate data or model fitting data, with mandatory metadata. It is worth noting that some models include the data as part of the fitted model object, e.g. \code{lm} and \code{glm}, which access embedded data with \code{model.frame}. For large datasets that are embedded in the model, it may be worth documenting metadata a placeholder object such as the character string \code{"embedded data"} rather than a redundant data object.
 
 An S4 class to store data with descriptive metadata.
 }
@@ -95,7 +95,7 @@ Other amModelLib: \code{\link{AMModels}};
   \code{\link{getAMData}}, \code{\link{getAMData}},
   \code{\link{getAMModel}}, \code{\link{getters}},
   \code{\link{modelMeta}}, \code{\link{modelMeta<-}};
-  \code{\link{getAMModelLib}};
+  \code{\link{grepAMModelLib}};
   \code{\link{insertAMModelLib}}; \code{\link{lsData}},
   \code{\link{lsData}}, \code{\link{lsModels}},
   \code{\link{lsModels}}; \code{\link{rmData}},
