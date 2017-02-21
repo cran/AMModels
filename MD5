@@ -1,4 +1,4 @@
-aeb590cd1fa4eb9248c1895da7342564 *DESCRIPTION
+1e572d57fb073de86a1d527af5d985f7 *DESCRIPTION
 de7d3d40ea6d0f540f1dc23856812610 *NAMESPACE
 3fa8b2c4fd67c3038a58accb990011b7 *R/AMModels-package.R
 e9cd3ec5ea237e171366bc68a8766ad9 *R/amData.R
@@ -16,10 +16,11 @@ ef9a2bb6dd997d2f2bf80f7e8c2e016a *R/methods-amModel.R
 9cbc997e12dcbb0416fe244ff92611bf *R/rmModelsData.R
 3ffe86a2871dc765a076f5b15c1ccdb6 *R/simCovariate.R
 47467270da40e425a359043a9825c18e *data/mymodels.rda
+4947f455886baab76b7f71e22f196aa4 *inst/doc/AMModelsCheatSheet.pdf
 971d28252474cf33c9f81b1d52d304eb *inst/modelMgr/createTimedAlert.R
 cdf0dbf55e7a8dfcb140dcd1069e339a *inst/modelMgr/server.R
 b08b898d48719a063cd23012da474350 *inst/modelMgr/textareaInput.R
-521aa581ca33b6fd94efbb112d2142c3 *inst/modelMgr/ui.R
+1cca8d34ae54603b66c96962839bc491 *inst/modelMgr/ui.R
 5849441c0c44f599839c954d47a4b6b3 *inst/modelMgr/www/css/custom.css
 12e222d804323dd651d52909576bba7b *inst/modelMgr/www/js/timedAlertCreate.js
 9db1c99dd46d56fef4cf44c65cf08dbc *man/AMModels.Rd

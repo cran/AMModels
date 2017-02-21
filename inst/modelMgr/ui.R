@@ -322,7 +322,7 @@ shinyUI(
                                     actionButton('sendAMMLToGlobalEnv', '', icon=icon('save')),
                                 '</span></span>'
                             )),
-                            bsTooltip(id='newObjectName', title='Name must be provided for object summarized above to be saved to your Global Environment. Coerced to valid R name.', placement = "top", trigger = "hover", options = list(container='body'))
+                            bsTooltip(id='newObjectName', title='Name must be provided for object summarized below to be saved to your Global Environment. Coerced to valid R name.', placement = "top", trigger = "hover", options = list(container='body'))
                         ),
                         div(style='clear:both;',
                             p(style='font-weight:bold;', 'Output Preview:'),
