@@ -147,7 +147,7 @@ grepAMModelLib <- function(
         )
         if (length(datmod)) {
             # pull out those pointers
-            datpointers <- unique(sapply(1:length(datmod), function(x) amml@models[[names(datmod)[x]]]@metadata[[datmod[x]]]))
+            datpointers <- sapply(1:length(datmod), function(x) amml@models[[names(datmod)[x]]]@metadata[[datmod[x]]])
             # identify which pointers match the search results and pull those models
             getmodel <- amml@models[names(datmod)][datpointers %in% names(dat)]
             amml@models <- getmodel

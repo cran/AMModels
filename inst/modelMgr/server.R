@@ -478,151 +478,153 @@ shinyServer(
 #            selected.model <- getSelectedModel()
             if(!is.null(selected.model)) {
                 if(is(selected.model, 'amModelLib')) {
-                    # Make table headings
-                    th <- '
-                        <th style="text-align:right;padding-right:1em;">Select</th>
-                        <th style="text-align:center;padding-right:1em;">Name</th>
-                        <th style="text-align:center;">Summary</th>
-                        <th style="text-align:center;">Edit</th>
-                    '
-                    # Get model and data names/presence
-                    modnames <- names(selected.model@models)
-                    datnames <- names(selected.model@data)
-                    nmodels <- length(modnames)
-                    ndata <- length(datnames)
-                    if(nmodels) {
-                        # Remove periods from names for js compatibility  
-                        modnames <- paste0(gsub('\\.', '', modnames), 1:length(modnames))   
-                        # Make table data
-                        modrows <- sapply(1:nmodels, function(x) {
-                            paste0('
+                    isolate({
+                        # Make table headings
+                        th <- '
+                            <th style="text-align:right;padding-right:1em;">Select</th>
+                            <th style="text-align:center;padding-right:1em;">Name</th>
+                            <th style="text-align:center;">Summary</th>
+                            <th style="text-align:center;">Edit</th>
+                        '
+                        # Get model and data names/presence
+                        modnames <- names(selected.model@models)
+                        datnames <- names(selected.model@data)
+                        nmodels <- length(modnames)
+                        ndata <- length(datnames)
+                        if(nmodels) {
+                            # Remove periods from names for js compatibility  
+                            modnames <- paste0(gsub('\\.', '', modnames), 1:length(modnames))   
+                            # Make table data
+                            modrows <- sapply(1:nmodels, function(x) {
+                                paste0('
+                                    <tr>
+                                        <td style="width:8em;text-align:right;padding-right:1em;">
+                                           <div class="checkbox">
+                                                <label>
+                                                    <input id="', paste0('select', modnames[x]),'" type="checkbox"/>
+                                                </label>
+                                            </div> 
+                                        </td>
+                                        <td style="width:20em;text-align:center;padding-right:1em;">', names(selected.model@models)[x], '</td>
+                                        <td style="width:6em;text-align:center;">
+                                            <button id="', paste0('summary', modnames[x]), '" class="btn btn-default action-button shiny-bound-input" data-target="', paste0('#summary', modnames[x], 'modal'), '" data-toggle="modal" type="button">
+                                                <i class="fa fa-file-text-o"></i>
+                                            </button>
+                                        </td>
+                                        <td style="width:6em;text-align:center;">
+                                            <button id="', paste0('edit', modnames[x]), '" class="btn btn-default action-button shiny-bound-input" data-target="', paste0('#edit', modnames[x], 'modal'), '" data-toggle="modal" type="button">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                        </td>
+                                    </tr>'
+                                )
+                            })
+                        } else {
+                            modrows <- '
                                 <tr>
-                                    <td style="width:8em;text-align:right;padding-right:1em;">
-                                       <div class="checkbox">
-                                            <label>
-                                                <input id="', paste0('select', modnames[x]),'" type="checkbox"/>
-                                            </label>
-                                        </div> 
-                                    </td>
-                                    <td style="width:20em;text-align:center;padding-right:1em;">', names(selected.model@models)[x], '</td>
-                                    <td style="width:6em;text-align:center;">
-                                        <button id="', paste0('summary', modnames[x]), '" class="btn btn-default action-button shiny-bound-input" data-target="', paste0('#summary', modnames[x], 'modal'), '" data-toggle="modal" type="button">
-                                            <i class="fa fa-file-text-o"></i>
-                                        </button>
-                                    </td>
-                                    <td style="width:6em;text-align:center;">
-                                        <button id="', paste0('edit', modnames[x]), '" class="btn btn-default action-button shiny-bound-input" data-target="', paste0('#edit', modnames[x], 'modal'), '" data-toggle="modal" type="button">
-                                            <i class="fa fa-pencil"></i>
-                                        </button>
-                                    </td>
+                                    <td style="width:8em;text-align:right;padding-right:1em;"></td>
+                                    <td style="width:20em;text-align:center;padding-right:1em;">--- There are no models ---</td>
+                                    <td style="width:6em;text-align:center;"></td>
+                                    <td style="width:6em;text-align:center;"></td>
                                 </tr>'
-                            )
-                        })
-                    } else {
-                        modrows <- '
-                            <tr>
-                                <td style="width:8em;text-align:right;padding-right:1em;"></td>
-                                <td style="width:20em;text-align:center;padding-right:1em;">--- There are no models ---</td>
-                                <td style="width:6em;text-align:center;"></td>
-                                <td style="width:6em;text-align:center;"></td>
-                            </tr>'
-                    }
-                    if(ndata) {
-                        # Remove periods from names for js compatibility  
-                        datnames <- paste0(gsub('\\.', '', datnames), 1:length(datnames))  
-                        # Make table data
-                        datrows <- sapply(1:ndata, function(x) {
-                            paste0('
+                        }
+                        if(ndata) {
+                            # Remove periods from names for js compatibility  
+                            datnames <- paste0(gsub('\\.', '', datnames), 1:length(datnames))  
+                            # Make table data
+                            datrows <- sapply(1:ndata, function(x) {
+                                paste0('
+                                    <tr>
+                                        <td style="width:8em;text-align:right;padding-right:1em;">
+                                           <div class="checkbox">
+                                                <label>
+                                                    <input id="', paste0('select', datnames[x]),'" type="checkbox"/>
+                                                </label>
+                                            </div> 
+                                        </td>
+                                        <td style="width:20em;text-align:center;padding-right:1em;">', names(selected.model@data)[x], '</td>
+                                        <td style="width:6em;text-align:center;">
+                                            <button id="', paste0('summary', datnames[x]), '" class="btn btn-default action-button shiny-bound-input" data-target="', paste0('#summary', datnames[x], 'modal'), '" data-toggle="modal" type="button">
+                                                <i class="fa fa-file-text-o"></i>
+                                            </button>
+                                        </td>
+                                        <td style="width:6em;text-align:center;">
+                                            <button id="', paste0('edit', datnames[x]), '" class="btn btn-default action-button shiny-bound-input" data-target="', paste0('#edit', datnames[x], 'modal'), '" data-toggle="modal" type="button">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                        </td>
+                                    </tr>'
+                                )
+                            })
+                        } else {
+                            datrows <- '
                                 <tr>
-                                    <td style="width:8em;text-align:right;padding-right:1em;">
-                                       <div class="checkbox">
-                                            <label>
-                                                <input id="', paste0('select', datnames[x]),'" type="checkbox"/>
-                                            </label>
-                                        </div> 
-                                    </td>
-                                    <td style="width:20em;text-align:center;padding-right:1em;">', names(selected.model@data)[x], '</td>
-                                    <td style="width:6em;text-align:center;">
-                                        <button id="', paste0('summary', datnames[x]), '" class="btn btn-default action-button shiny-bound-input" data-target="', paste0('#summary', datnames[x], 'modal'), '" data-toggle="modal" type="button">
-                                            <i class="fa fa-file-text-o"></i>
-                                        </button>
-                                    </td>
-                                    <td style="width:6em;text-align:center;">
-                                        <button id="', paste0('edit', datnames[x]), '" class="btn btn-default action-button shiny-bound-input" data-target="', paste0('#edit', datnames[x], 'modal'), '" data-toggle="modal" type="button">
-                                            <i class="fa fa-pencil"></i>
-                                        </button>
-                                    </td>
+                                    <td style="width:8em;text-align:right;padding-right:1em;"></td>
+                                    <td style="width:20em;text-align:center;padding-right:1em;">--- There are no datasets ---</td>
+                                    <td style="width:6em;text-align:center;"></td>
+                                    <td style="width:6em;text-align:center;"></td>
                                 </tr>'
+                        }
+                        # Assemble model table
+                        modtab <- HTML(paste0(
+                            span(style='padding-top:0.1em;padding-left:2em;',
+                                HTML('
+                                    <button id="selectAllModels" style="width: 7.5em;" type="button" class="btn btn-default action-button">
+                                        <i class="fa fa-check-square-o"></i>
+                                        <i class="fa fa-square-o"></i>
+                                    </button>'
+                                )
+    #                            actionButton("selectAllModels", '', icon=list(icon('check-square-o'), icon('square-o')), width='7.5em')
                             )
-                        })
-                    } else {
-                        datrows <- '
-                            <tr>
-                                <td style="width:8em;text-align:right;padding-right:1em;"></td>
-                                <td style="width:20em;text-align:center;padding-right:1em;">--- There are no datasets ---</td>
-                                <td style="width:6em;text-align:center;"></td>
-                                <td style="width:6em;text-align:center;"></td>
-                            </tr>'
-                    }
-                    # Assemble model table
-                    modtab <- HTML(paste0(
-                        span(style='padding-top:0.1em;padding-left:2em;',
-                            HTML('
-                                <button id="selectAllModels" style="width: 7.5em;" type="button" class="btn btn-default action-button">
-                                    <i class="fa fa-check-square-o"></i>
-                                    <i class="fa fa-square-o"></i>
-                                </button>'
+                            ,
+                            bsTooltip(id='selectAllModels', title='Select/deselect all', placement = "top", trigger = "hover", options = list(container='body')), '
+                            <table id="model_table" style="width:100%"><tr>', th, '</tr>', paste0(modrows, collapse=''), '
+                            </table>
+                            <span style="padding-left:2em;">
+                                <button id="addModelToAMML" class="btn btn-default action-button shiny-bound-input" data-target="#addModelToAMMLmodal" data-toggle="modal" type="button">
+                                    <i class="fa fa-plus"></i>
+                                    Add model
+                                </button>
+                            </span>'
+                        ))
+                        # Assemble data table
+                        dattab <- HTML(paste0(
+                            span(style='padding-top:0.1em;padding-left:2em;',
+                                HTML('
+                                    <button id="selectAllData" style="width: 7.5em;" type="button" class="btn btn-default action-button">
+                                        <i class="fa fa-check-square-o"></i>
+                                        <i class="fa fa-square-o"></i>
+                                    </button>'
+                                )
+    #                            actionButton("selectAllData", '', icon=list(icon('check-square-o'), icon('square-o')), width='7.5em')
                             )
-#                            actionButton("selectAllModels", '', icon=list(icon('check-square-o'), icon('square-o')), width='7.5em')
-                        )
-                        ,
-                        bsTooltip(id='selectAllModels', title='Select/deselect all', placement = "top", trigger = "hover", options = list(container='body')), '
-                        <table id="model_table" style="width:100%"><tr>', th, '</tr>', paste0(modrows, collapse=''), '
-                        </table>
-                        <span style="padding-left:2em;">
-                            <button id="addModelToAMML" class="btn btn-default action-button shiny-bound-input" data-target="#addModelToAMMLmodal" data-toggle="modal" type="button">
-                                <i class="fa fa-plus"></i>
-                                Add model
-                            </button>
-                        </span>'
-                    ))
-                    # Assemble data table
-                    dattab <- HTML(paste0(
-                        span(style='padding-top:0.1em;padding-left:2em;',
-                            HTML('
-                                <button id="selectAllData" style="width: 7.5em;" type="button" class="btn btn-default action-button">
-                                    <i class="fa fa-check-square-o"></i>
-                                    <i class="fa fa-square-o"></i>
-                                </button>'
-                            )
-#                            actionButton("selectAllData", '', icon=list(icon('check-square-o'), icon('square-o')), width='7.5em')
-                        )
-                        ,
-                        bsTooltip(id='selectAllData', title='Select/deselect all', placement = "top", trigger = "hover", options = list(container='body')), '
-                        <table id="data_table" style="width:100%"><tr>', th, '</tr>', paste0(datrows, collapse=''), '</table>
-                        <span style="padding-left:2em;">
-                            <button id="addDataToAMML" class="btn btn-default action-button shiny-bound-input" data-target="#addDataToAMMLmodal" data-toggle="modal" type="button">
-                                <i class="fa fa-plus"></i>
-                                Add data
-                            </button>
-                        </span>'
-                    ))
+                            ,
+                            bsTooltip(id='selectAllData', title='Select/deselect all', placement = "top", trigger = "hover", options = list(container='body')), '
+                            <table id="data_table" style="width:100%"><tr>', th, '</tr>', paste0(datrows, collapse=''), '</table>
+                            <span style="padding-left:2em;">
+                                <button id="addDataToAMML" class="btn btn-default action-button shiny-bound-input" data-target="#addDataToAMMLmodal" data-toggle="modal" type="button">
+                                    <i class="fa fa-plus"></i>
+                                    Add data
+                                </button>
+                            </span>'
+                        ))
 
-                    # Display modelLib metadata in a tab rather than above the tabs
-	                infotab <- div(style='clear:both;padding-bottom:1em;',
-                        textareaInput('amModelLibDescription', 'Description', value=ammlDesc(selected.model), rows=3, width = '100%'),
-                        p(style='font-weight:bold;', 'Info/Metadata'),
-                        uiOutput('amModelLibInfoUI')
-                    )
-                    
-                    # Create tabset
-                    tabsetPanel(
-                        id='amModelLibSelectedElement',
-                        selected=input$amModelLibSelectedElement,
-	                    tabPanel('Info/Metadata', infotab),
-                        tabPanel('Models', modtab),
-                        tabPanel('Data', dattab)
-                    )
+                        # Display modelLib metadata in a tab rather than above the tabs
+	                    infotab <- div(style='clear:both;padding-bottom:1em;',
+                            textareaInput('amModelLibDescription', 'Description', value=ammlDesc(selected.model), rows=3, width = '100%'),
+                            p(style='font-weight:bold;', 'Info/Metadata'),
+                            uiOutput('amModelLibInfoUI')
+                        )
+                        
+                        # Create tabset
+                        tabsetPanel(
+                            id='amModelLibSelectedElement',
+                            selected=input$amModelLibSelectedElement,
+	                        tabPanel('Info/Metadata', infotab),
+                            tabPanel('Models', modtab),
+                            tabPanel('Data', dattab)
+                        )
+                    })
                 }
             } else {
                 tabsetPanel(
@@ -649,6 +651,7 @@ shinyServer(
                     nmodels <- length(modnames)
                     ndata <- length(datnames)
                     selectedmodels <- selecteddata <- NULL
+                    prevselected <- values$checkedModelsData
                     if(nmodels) {
                         # sanitize names for js compatibility
                         modnames <- paste0('select', gsub('\\.', '', modnames), 1:length(modnames))
@@ -1319,7 +1322,7 @@ shinyServer(
                     assign(amml, editedModel, pos='.GlobalEnv')
                     updateRadioButtons(session, 'selectAMModelLib', selected=input$selectAMModelLib)
                     # create an alert to notify
-                    createTimedAlert(session, anchorId='saveAlert', alertId='saveSuccessAlert', title='', content='<p style="text-align:center;">Saved</p>', timeout=2000, style='info', append=TRUE)
+                    createTimedAlert(session, anchorId='saveAlert', alertId='saveSuccessAlert', title='', content=paste0('<p style="text-align:center;">"', amml, '" is now in your Global Environment.</p>'), timeout=2000, style='info', append=TRUE)
                 }
             })
         })

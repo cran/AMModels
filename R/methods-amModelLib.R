@@ -87,14 +87,18 @@ setMethod('summary', 'amModelLib', function(object, name, ...) {
     if (missing(name)) {
         mshow <- modmet <- dshow <- datmet <- NULL
         # Print description
-        if (object@description != '') cat('\nDescription:\n', object@description, '\n')
+        if (object@description != '') {
+            cat('\nDescription:\n') 
+            catwrap(object@description)
+        }
         
         # Print info
         cat('\nInfo:\n')
         info <- object@info
         if (length(info)) {
             for (i in 1:length(info)) {
-                cat(' ', names(info)[i], '\n   ', info[[i]], '\n')
+                cat(' ', names(info)[i], '\n   ')
+                catwrap(info[[i]])
             }
         } else {
             cat('\n** no informative metadata **\n')
@@ -168,14 +172,18 @@ setMethod('summary', 'amModelLib', function(object, name, ...) {
 #' @rdname methods-amModelLib
 setMethod('show', 'amModelLib', function(object) {
     # Print description
-    if (object@description != '') cat('\nDescription:\n', object@description, '\n')
+    if (object@description != '') {
+        cat('\nDescription:\n')
+        catwrap(object@description)
+    }
     
     # Print info
     cat('\nInfo:\n')
     info <- object@info
     if (length(info)) {
         for (i in 1:length(info)) {
-            cat(' ', names(info)[i], '\n   ', info[[i]], '\n\n')
+            cat(' ', names(info)[i], '\n   ')
+            catwrap(info[[i]])
         }
     } else {
         cat('** no informative metadata **\n\n')

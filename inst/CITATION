@@ -1,0 +1,20 @@
+citHeader("To cite AMModels in publications use:")
+
+citEntry(entry = "Article",
+  title        = "{AMModels}: An R package for storing models, data, and metadata to facilitate adaptive management",
+  author       = personList(as.person("Therese M. Donovan"),
+                   as.person("Jonathan E. Katz")),
+  journal      = "PLoS ONE",
+  year         = "2018",
+  volume       = "13",
+  number       = "2",
+  pages        = "e0188966",
+  url          = "https://doi.org/10.1371/journal.pone.0188966",
+
+  textVersion  =
+  paste("Donovan TM, Katz JE (2018)",
+        "AMModels: An R package for storing models, data, and metadata to facilitate adaptive management.",
+        "PLoS ONE 13(2): e0188966.",
+        "https://doi.org/10.1371/journal.pone.0188966.")
+)
+

@@ -22,9 +22,9 @@ shinyUI(
                 div(style='padding:0.5em 1.5em 0.5em 0em;background-color:#f5f5f5;', 
                     HTML({'
                         <ol>
-                            <li>Click the save button below the search box.</li>
+                            <li>Click the create binding button below the search box.</li>
                             <li>Type a name for the new object below the summary that appeared in the gray box on the right side of the screen. <div style="margin-left:34px;background-color:#ffffcc;border-left:6px solid #ffeb3b;padding:0.5em 2em;"><p style="padding-top:0.5em;">To overwrite the current object, set the name identical to the object being edited.</p></div></li>
-                        <li>Click the save button next to the name box. <div style="margin-left:34px;background-color:#ffffcc;border-left:6px solid #ffeb3b;padding:0.5em 2em;"><p style="padding-top:0.5em;">If you overwrote the object being edited, you may need to re-select the object from your Global Environment to verify the changes. You may also do this to revert unsaved changes.</p></div></li>'
+                        <li>Click the create binding button next to the name box. <div style="margin-left:34px;background-color:#ffffcc;border-left:6px solid #ffeb3b;padding:0.5em 2em;"><p style="padding-top:0.5em;">If you overwrote the object being edited, you may need to re-select the object from your Global Environment to verify the changes. You may also do this to revert changes before a binding has been created.</p></div></li>'
                     })
                 )
             ),
@@ -215,7 +215,7 @@ shinyUI(
                             bsTooltip(id='revertchanges', title='Revert all changes', placement = "top", trigger = "hover", options = list(container='body')),
                             
                             actionButton('saveallchanges', '', icon=icon('arrow-circle-right', class='fa-2x'), style='border:transparent;'),
-                            bsTooltip(id='saveallchanges', title='Move all changes to the output preview pane for saving', placement = "top", trigger = "hover", options = list(container='body'))
+                            bsTooltip(id='saveallchanges', title='Move all changes to the output preview pane', placement = "top", trigger = "hover", options = list(container='body'))
                         )
                     ),
 ##                   These moved to a tab in the 'selectedModelContents' panel below
@@ -311,7 +311,7 @@ shinyUI(
                                         background-image: none;
                                         border: 1px solid #ccc;
                                         box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-                                        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;" id="newObjectName" type="text" value="" placeholder="New object name"/>
+                                        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;" id="newObjectName" type="text" value="" placeholder="New library name"/>
                                     <script>
                                         $(document).keyup(function(event) {
                                             if ($("#newObjectName").is(":focus") && (event.keyCode == 13)) {
@@ -322,7 +322,7 @@ shinyUI(
                                     actionButton('sendAMMLToGlobalEnv', '', icon=icon('save')),
                                 '</span></span>'
                             )),
-                            bsTooltip(id='newObjectName', title='Name must be provided for object summarized below to be saved to your Global Environment. Coerced to valid R name.', placement = "top", trigger = "hover", options = list(container='body'))
+                            bsTooltip(id='newObjectName', title='Name must be provided for object summarized below to be moved to your Global Environment. Coerced to valid R name. Objects in your Global Environment must still be saved to disk using save() or saveRDS().', placement = "top", trigger = "hover", options = list(container='body'))
                         ),
                         div(style='clear:both;',
                             p(style='font-weight:bold;', 'Output Preview:'),
