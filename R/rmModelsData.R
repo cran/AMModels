@@ -80,11 +80,30 @@
 rmModel <- function(amml, x) {
     if (!methods::is(amml, 'amModelLib') || missing(amml)) stop('Must provide an amModelLib object.')
     if(missing(x)) stop("Must specify value 'x' to remove.")
+    # identify orphan posterior models to report
+    modnames <- unlist(lapply(amml@models, function(y) grep('prior', names(y@metadata), ignore.case = TRUE)))
+    modnames2 <- unlist(lapply(names(modnames), function(y) amml@models[[y]]@metadata[[modnames[y]]]))
+    orphanmods <- NULL
+    names(modnames2) <- names(modnames)
     if (any(all(is.numeric(x)), all(is.logical(x)))) {
+        rmmod <- names(amml@models)[x]
+        orphanmods <- names(modnames2)[modnames2 %in% rmmod]
         amml@models <- amml@models[-x]
     } else if (all(is.character(x))) {
+        mn <- names(amml@models)
+        names(mn) <- mn
+        rmmod <- mn[x]
+        orphanmods <- names(modnames2)[modnames2 %in% rmmod]
         amml@models <- amml@models[-which(names(amml@models) %in% x)]
     } else stop("Invalid class for 'x'.")
+    if (length(orphanmods)) warning('The following models have dangling prior references: ', paste0(orphanmods, collapse = ', '))
+    
+## These lines can be removed after testing    
+#    if (any(all(is.numeric(x)), all(is.logical(x)))) {
+#        amml@models <- amml@models[-x]
+#    } else if (all(is.character(x))) {
+#        amml@models <- amml@models[-which(names(amml@models) %in% x)]
+#    } else stop("Invalid class for 'x'.")
     amml
 }
 

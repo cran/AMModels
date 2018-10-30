@@ -5,7 +5,7 @@
 #' @param amml  An \code{\link{amModelLib}} object
 #' @param search Length 1 \code{character} vector indicating whether to search and return models or data that meet the search criteria.
 #' @param \dots Additional arguments to \code{grep}.
-#' @details \code{grep} is used to search both names, values (models/data), and metadata. An attempt is made to keep data with models if searching for models, or to keep models with data if searching for data. The relational link between models their data relies on a case-agnostic 'data' element in the model metadata that names the linked data. 
+#' @details \code{grep} is used to search both names, values (models/data), and metadata. An attempt is made to keep data with models if searching for models, or to keep models with data if searching for data, or to keep prior/posterior models together. The relational link between models their data relies on a case-agnostic 'data' element in the model metadata that names the linked data, and the same is true for models that use 'prior' to link to other models. 
 #' @return An object of class \code{amModelLib}.
 #' @family amModelLib
 #' @keywords manip
@@ -105,12 +105,28 @@ grepAMModelLib <- function(
         ind.mod <- grep(pattern, mod.l, ...)
         ind.mmet <- grep(pattern, mmet.l, ...)
         models <- models[unique(c(ind.name, ind.mod, ind.mmet))]
+
+        # find priors pointed to by each model
+        modprior <- unlist(
+            lapply(models, function(x) grep('prior', names(x@metadata), ignore.case = TRUE))
+        )
+        if (length(modprior)) {
+            # pull out the pointers
+            modpointers <- unique(sapply(1:length(modprior), function(x) amml@models[[names(modprior)[x]]]@metadata[[modprior[x]]]))
+            # identify which pointers match the search results and pull those datasets
+            getmodels <- amml@models[modpointers]
+            # ignore dead-end pointers
+            getmodels <- getmodels[unlist(lapply(getmodels, function(x) as.logical(length(x))))]
+            if(length(getmodels)) models <- c(models, getmodels)
+        } 
+        
         # return an amModelLib, complete with associated data
         if (length(models)) {
             amml@models <- models
         } else {
             amml@models <- list()
         }
+        
         # find that data pointed to by each model
         moddata <- unlist(
             lapply(models, function(x) grep('data', names(x@metadata), ignore.case = TRUE))
@@ -120,11 +136,14 @@ grepAMModelLib <- function(
             modpointers <- unique(sapply(1:length(moddata), function(x) amml@models[[names(moddata)[x]]]@metadata[[moddata[x]]]))
             # identify which pointers match the search results and pull those datasets
             getdata <- amml@data[modpointers]
+            # Ignore dead-end pointers
+            getdata <- getdata[unlist(lapply(getdata, function(x) as.logical(length(x))))]
     #        if(!length(moddata)) getdata <- unname(getdata)
             amml@data <- getdata
         } else {
             amml@data <- list()
         }
+        
         amml
     } else if (search == 'data') {
         dat <- amml@data
@@ -143,7 +162,7 @@ grepAMModelLib <- function(
         }
         # find the models that point to data
         datmod <- unlist(
-            lapply(amml@models, function(x) grep('data', names(x@metadata), ignore.case = TRUE))
+            lapply(amml@models, function(x) any(grep('data', names(x@metadata), ignore.case = TRUE), grep('prior', names(x@metadata), ignore.case = TRUE)))
         )
         if (length(datmod)) {
             # pull out those pointers

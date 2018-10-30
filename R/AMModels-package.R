@@ -11,6 +11,7 @@
 #' @keywords package
 #' @importFrom methods is new
 #' @importFrom stats rbeta rbinom rmultinom rnorm rpois runif
+#' @importFrom unmarked unmarkedFrameOccu 
 #' @section Copyright:  
 #'    This software is in the public domain because it contains materials
 #'    that originally came from the United States Geological Survey, an agency of

@@ -9,6 +9,7 @@
 #' @param drop Not used.
 #' @param value Replacement value. 
 #' @param \dots Additional arguments passed to other functions or methods.
+#' @description Getters and setters for models and data.
 #' @details Summary assumes some meaningful summary method exists for each object in its home package.
 #' @keywords methods
 #' @examples

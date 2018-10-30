@@ -80,7 +80,8 @@ insertAMModelLib <- function(
         if (length(models)) {
             mn <- names(models)
             if (any(is.null(mn))) stop('Model names are required.')
-            names(models) <- tolower(mn)
+            names(models) <- mn
+#            names(models) <- tolower(mn)
             datnames <- unlist(lapply(models, function(y) grep('data', names(y@metadata), ignore.case = TRUE)))
             datnames2 <- unlist(lapply(names(datnames), function(y) models[[y]]@metadata[[datnames[y]]]))
         } else models <- datnames2 <- NULL
@@ -89,7 +90,8 @@ insertAMModelLib <- function(
         if (length(data)) {
             dn <- names(data)
             if (any(is.null(dn))) stop('Data names are required.')
-            names(data) <- tolower(dn)
+            names(data) <- dn
+#            names(data) <- tolower(dn)
         } else data <- NULL
     } else data <- NULL
     if (missing(amml)) {
